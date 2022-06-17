@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cab_Invoice_Generator
 {
-    internal class MultipleRides
+    public class MultipleRides
     {
         public Dictionary<string, List<Ride>> repo = new Dictionary<string, List<Ride>>();
         public List<Ride> list = new List<Ride>();
@@ -16,11 +16,21 @@ namespace Cab_Invoice_Generator
         {
             Ride ride = new Ride();
             list = new List<Ride>();
+            Console.WriteLine("Which ride you want to take:\n1.Noramal Ride\n2.Premium Ride");
+            int rideType = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter Distance(KM):");
             ride.distance = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Enter Time(Min):");
             ride.time = Convert.ToDouble(Console.ReadLine());
-            ride.Fare = generate.calculateFare(ride.distance, ride.time);
+            switch (rideType)
+            {
+                case 1:
+                    ride.Fare = generate.calculateNormalFare(ride.distance, ride.time);
+                    break;
+                case 2:
+                    ride.Fare = generate.calculatePremiumFare(ride.distance, ride.time);
+                    break;
+            }
             list.Add(ride);
         }
         public void MultipleFare()
