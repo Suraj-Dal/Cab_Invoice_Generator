@@ -8,25 +8,44 @@ namespace Cab_Invoice_Generator
 {
     internal class MultipleRides
     {
-        public Dictionary<string, double> rides = new Dictionary<string, double>();
+        public Dictionary<string, List<Ride>> repo = new Dictionary<string, List<Ride>>();
+        public List<Ride> list = new List<Ride>();
         InvoiceGenerator generate = new InvoiceGenerator();
         double fare = 0;
-        public void calculateMultipleFare(string id, double distance, double time)
+        public void getDetails()
         {
-            
-            double fare = generate.calculateFare(distance, time);
-            this.rides.Add(id, fare);
+            Ride ride = new Ride();
+            list = new List<Ride>();
+            Console.WriteLine("Enter Distance(KM):");
+            ride.distance = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter Time(Min):");
+            ride.time = Convert.ToDouble(Console.ReadLine());
+            ride.Fare = generate.calculateFare(ride.distance, ride.time);
+            list.Add(ride);
+        }
+        public void MultipleFare()
+        {
+            Console.WriteLine("How many rides you want to take:");
+            int noOfRides = Convert.ToInt32(Console.ReadLine());
+            while (noOfRides != 0)
+            {
+                Console.WriteLine("Enter User ID:");
+                string userID = Console.ReadLine();
+                getDetails();
+                repo.Add(userID, list.ToList());
+
+                noOfRides--;
+            }
         }
         public void showInvoice()
         {
-            int count = 0;
-            foreach (var value in this.rides.Values)
+            Console.WriteLine("Enter user ID to view invoice:");
+            string userID = Console.ReadLine();
+            List<Ride> newList = repo[userID];
+            foreach (var item in newList)
             {
-                fare = fare + value;
-                count++;
+                Console.WriteLine("--------------Invoice-------------\nDistance of Journey:" + item.distance + " KM\nTime of Journey:" + item.time + " Min\nTotal Fare of Ride:" + item.Fare + " Rs");
             }
-            double aggregate = fare / count;
-            Console.WriteLine("--------------Invoice-------------\nTotal no. of rides:" + this.rides.Count +"\nTotal Fare for rides:"+ fare +" Rs\nAverage fare per ride:"+ aggregate +" Rs");
         }
     }
 }

@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Cab_Invoice_Generator
 {
-    internal class Ride
+    public class Ride
     {
-        public double distance;
-        public double time;
-        public Ride(double distance, double time)
-        {
-            this.distance = distance;
-            this.time = time;
-        }
+        public double distance { get; set; }
+        public double time { get; set; }
+        public double Fare { get; set; }
+        public double average { get; set; }
     }
 }
