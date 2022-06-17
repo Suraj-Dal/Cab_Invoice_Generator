@@ -17,7 +17,7 @@ namespace Cab_Invoice_Generator
             double fare = generate.calculateFare(distance, time);
             this.rides.Add(id, fare);
         }
-        public void calculateAggregate()
+        public void showInvoice()
         {
             int count = 0;
             foreach (var value in this.rides.Values)
@@ -26,7 +26,7 @@ namespace Cab_Invoice_Generator
                 count++;
             }
             double aggregate = fare / count;
-            Console.WriteLine("Aggregate for all rides is:"+ aggregate);
+            Console.WriteLine("--------------Invoice-------------\nTotal no. of rides:" + this.rides.Count +"\nTotal Fare for rides:"+ fare +" Rs\nAverage fare per ride:"+ aggregate +" Rs");
         }
     }
 }

@@ -5,11 +5,11 @@ while (rides != 0)
 {
     Console.WriteLine("Enter Ride ID:");
     string id = Console.ReadLine();
-    Console.WriteLine("Enter Distance:");
+    Console.WriteLine("Enter Distance(KM):");
     double dist = Convert.ToDouble(Console.ReadLine());
-    Console.WriteLine("Enter Time:");
+    Console.WriteLine("Enter Time(Min):");
     double time = Convert.ToDouble(Console.ReadLine());
     multiride.calculateMultipleFare(id, dist, time);
     rides--;
 }
-multiride.calculateAggregate();
+multiride.showInvoice();
