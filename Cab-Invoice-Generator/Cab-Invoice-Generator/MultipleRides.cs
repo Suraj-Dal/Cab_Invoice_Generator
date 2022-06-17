@@ -11,10 +11,9 @@ namespace Cab_Invoice_Generator
         public Dictionary<string, double> rides = new Dictionary<string, double>();
         InvoiceGenerator generate = new InvoiceGenerator();
         double fare = 0;
-        public void calculateMultipleFare(double distance, double time)
+        public void calculateMultipleFare(string id, double distance, double time)
         {
-            Console.WriteLine("Enter Ride ID:");
-            string id = Console.ReadLine();
+            
             double fare = generate.calculateFare(distance, time);
             this.rides.Add(id, fare);
         }
